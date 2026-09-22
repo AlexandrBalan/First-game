@@ -14,6 +14,8 @@ int main() {
 
     bn::fixed speed = 5.5;
 
+    dot.set_scale(2);
+
     while(true) {
         if(bn::keypad::left_held()) {
             dot.set_x(dot.x() - speed);
@@ -27,6 +29,8 @@ int main() {
         if(bn::keypad::down_held()) {
             dot.set_y(dot.y() + speed);
         }
+        dot.set_rotation_angle_safe((dot.rotation_angle() + 5));
         bn::core::update();
     }
+
 }
