@@ -14,22 +14,43 @@ int main() {
 
     bn::fixed speed = 5.5;
 
+    double gravity = 13 / 60;
+
     dot.set_scale(2);
 
     while(true) {
         if(bn::keypad::left_held()) {
             dot.set_x(dot.x() - speed);
         }
+
+        if(dot.x() > 105 ) {
+            dot.set_x(105);
+        }
+
+        if(dot.y() > 40) {
+            dot.set_y(40);
+            dot.set_vertical_scale(2);
+        }
+
         if(bn::keypad::right_held()) {
             dot.set_x(dot.x() + speed);
         }
         if(bn::keypad::up_held()) {
-            dot.set_y(dot.y() - speed);
+            dot.set_y(dot.y() + 20);
         }
         if(bn::keypad::down_held()) {
             dot.set_y(dot.y() + speed);
         }
-        dot.set_rotation_angle_safe((dot.rotation_angle() + 5));
+
+        if(bn::keypad::any_pressed()) {
+            dot.set_y(dot.y() + gravity);
+        }
+
+
+        dot.set_rotation_angle_safe((dot.rotation_angle() + 10));
+
+
+        dot.set_y(dot.y() + gravity);
         bn::core::update();
     }
 
